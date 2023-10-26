@@ -61,13 +61,13 @@ class Band {
 
 // Musician class
 class Musician {
-  constructor(name, information, birthYear) {
+  constructor(name, information, birthYear, bands = [], previousBands = [], instrument) {
     this.name = name;
     this.information = information;
     this.birthYear = birthYear;
     this.bands = [];
     this.previousBands = [];
-    this.instruments = [];
+    this.instruments = instrument;
   }
 
   addBand(band) {
@@ -88,12 +88,6 @@ class Musician {
   addPreviousBand(band) {
     if (!this.previousBands.includes(band)) {
       this.previousBands.push(band);
-    }
-  }
-
-  addInstrument(instrument) {
-    if (!this.instruments.includes(instrument)) {
-      this.instruments.push(instrument);
     }
   }
 
@@ -174,10 +168,10 @@ async function runProgram() {
       case '3':
         // Create new musician
         const musicianName = await prompt('Enter musician name: ');
-        const musicianInformation = await prompt('Enter musician information: ');
+        const musicianInfo = await prompt('Enter musician information: ');
         const birthYear = parseInt(await prompt('Enter birth year: '));
-        const instruments = await prompt('Enter instruments (comma-separated): ');
-        const musician = new Musician(musicianName, musicianInformation, birthYear, [], [], instruments.split(',').map(i => i.trim()));
+        const instrument = await prompt('Enter musician instrument: ');
+        const musician = new Musician(musicianName, musicianInfo, birthYear, [], [], instrument);
         musicians.push(musician);
         break;
 

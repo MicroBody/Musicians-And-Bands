@@ -38,5 +38,13 @@
     "bands": [],
     "previousBands": [],
     "instruments": []
+  },
+  {
+    "name": "Todd",
+    "information": "This is Todd of Todd and the Tom's",
+    "birthYear": 1945,
+    "bands": [],
+    "previousBands": [],
+    "instruments": "Trumpet"
   }
 ]
