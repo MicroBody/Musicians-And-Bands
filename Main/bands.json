@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "name": "Band 1",
+    "info": "This is the first band",
+    "yearEstablished": 1981,
+    "yearDisbanded": null,
+    "members": [],
+    "priorMembers": []
+  }
+]

@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "name": "Test1",
+    "information": "This is the first musician",
+    "birthYear": 1976,
+    "bands": [],
+    "previousBands": [],
+    "instruments": []
+  },
+  {
+    "name": "Test1",
+    "information": "This is the first test",
+    "birthYear": 1934,
+    "bands": [],
+    "previousBands": [],
+    "instruments": []
+  },
+  {
+    "name": "Test2",
+    "information": "This is the second test musician",
+    "birthYear": 1934,
+    "bands": [],
+    "previousBands": [],
+    "instruments": []
+  },
+  {
+    "name": "Test3",
+    "information": "Third test",
+    "birthYear": 1935,
+    "bands": [],
+    "previousBands": [],
+    "instruments": []
+  },
+  {
+    "name": "Test3",
+    "information": "This is the third test",
+    "birthYear": 1955,
+    "bands": [],
+    "previousBands": [],
+    "instruments": []
+  }
+]

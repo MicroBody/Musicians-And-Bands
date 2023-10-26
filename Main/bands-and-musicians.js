@@ -176,7 +176,8 @@ async function runProgram() {
         const musicianName = await prompt('Enter musician name: ');
         const musicianInformation = await prompt('Enter musician information: ');
         const birthYear = parseInt(await prompt('Enter birth year: '));
-        const musician = new Musician(musicianName, musicianInformation, birthYear);
+        const instruments = await prompt('Enter instruments (comma-separated): ');
+        const musician = new Musician(musicianName, musicianInformation, birthYear, [], [], instruments.split(',').map(i => i.trim()));
         musicians.push(musician);
         break;
 
