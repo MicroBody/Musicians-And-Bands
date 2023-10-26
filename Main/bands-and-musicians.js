@@ -41,10 +41,13 @@ class Band {
 
 // Musician class
 class Musician {
-  constructor(name, birthYear) {
+  constructor(name, information, birthYear) {
     this.name = name;
+    this.information = information;
     this.birthYear = birthYear;
     this.bands = [];
+    this.previousBands = [];
+    this.instruments = [];
   }
 
   addBand(band) {
@@ -59,6 +62,18 @@ class Musician {
     if (index !== -1) {
       this.bands.splice(index, 1);
       band.removeMember(this);
+    }
+  }
+
+  addPreviousBand(band) {
+    if (!this.previousBands.includes(band)) {
+      this.previousBands.push(band);
+    }
+  }
+
+  addInstrument(instrument) {
+    if (!this.instruments.includes(instrument)) {
+      this.instruments.push(instrument);
     }
   }
 
@@ -136,8 +151,9 @@ async function runProgram() {
       case '3':
         // Create new musician
         const musicianName = await prompt('Enter musician name: ');
+        const musicianInformation = await prompt('Enter musician information: ');
         const birthYear = parseInt(await prompt('Enter birth year: '));
-        const musician = new Musician(musicianName, birthYear);
+        const musician = new Musician(musicianName, musicianInformation, birthYear);
         musicians.push(musician);
         break;
 
@@ -191,8 +207,11 @@ async function runProgram() {
         if (musicianIndexToShow !== -1) {
           const musician = musicians[musicianIndexToShow];
           console.log(`Name: ${musician.name}`);
-          console.log(`Age: ${musician.getAge()}`);
+          console.log(`Information: ${musician.information}`);
+          console.log(`Birth Year: ${musician.birthYear}`);
           console.log(`Bands: ${musician.bands.map(band => band.name).join(', ')}`);
+          console.log(`Previous Bands: ${musician.previousBands.map(band => band.name).join(', ')}`);
+          console.log(`Instruments: ${musician.instruments.join(', ')}`);
         } else {
           console.log('Musician not found');
         }
