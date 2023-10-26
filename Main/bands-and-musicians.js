@@ -1,13 +1,11 @@
 const readline = require('readline');
 const fs = require('fs');
 
-// Create readline interface
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-// Function to prompt user for input and return a promise
 function prompt(question) {
   return new Promise((resolve) => {
     rl.question(question, (answer) => {
@@ -16,7 +14,6 @@ function prompt(question) {
   });
 }
 
-// Band class
 class Band {
   constructor(name, info, yearEstablished, yearDisbanded = null) {
     this.name = name;
@@ -59,7 +56,6 @@ class Band {
   }
 }
 
-// Musician class
 class Musician {
   constructor(name, information, birthYear, bands = [], previousBands = [], instrument) {
     this.name = name;
@@ -98,13 +94,11 @@ class Musician {
 }
 
 
-// Function to save data to JSON file
 function saveData(filename, data) {
   fs.writeFileSync(filename, JSON.stringify(data, null, 2));
   console.log(`Data saved to ${filename}`);
 }
 
-// Function to load data from JSON file
 function loadData(filename) {
   try {
     const data = fs.readFileSync(filename, 'utf8');
@@ -115,17 +109,9 @@ function loadData(filename) {
   }
 }
 
-// Example usage
 const bands = loadData('bands.json');
 const musicians = loadData('musicians.json');
 
-// Prompt and handle user input to perform desired operations on bands and musicians
-
-// ...
-
-// ...
-
-// Example usage
 async function runProgram() {
   const bands = loadData('bands.json');
   const musicians = loadData('musicians.json');
@@ -145,7 +131,6 @@ async function runProgram() {
 
     switch (choice) {
       case '1':
-        // Create new band
         const bandName = await prompt('Enter band name: ');
         const bandInfo = await prompt('Enter band info: ');
         const yearEstablished = parseInt(await prompt('Enter year established: '));
@@ -155,7 +140,6 @@ async function runProgram() {
         break;
 
       case '2':
-        // Remove band
         const bandToRemove = await prompt('Enter band name to remove: ');
         const bandIndex = bands.findIndex(band => band.name === bandToRemove);
         if (bandIndex !== -1) {
@@ -166,7 +150,6 @@ async function runProgram() {
         break;
 
       case '3':
-        // Create new musician
         const musicianName = await prompt('Enter musician name: ');
         const musicianInfo = await prompt('Enter musician information: ');
         const birthYear = parseInt(await prompt('Enter birth year: '));
@@ -176,7 +159,6 @@ async function runProgram() {
         break;
 
       case '4':
-        // Remove musician
         const musicianToRemove = await prompt('Enter musician name to remove: ');
         const musicianIndex = musicians.findIndex(musician => musician.name === musicianToRemove);
         if (musicianIndex !== -1) {
@@ -187,7 +169,6 @@ async function runProgram() {
         break;
 
       case '5':
-        // Add musician to band
         const musicianToAdd = await prompt('Enter musician name to add: ');
         const bandToAddTo = await prompt('Enter band name to add musician to: ');
         const musicianIndexToAdd = musicians.findIndex(musician => musician.name === musicianToAdd);
@@ -203,7 +184,6 @@ async function runProgram() {
         break;
 
       case '6':
-        // Remove musician from band
         const musicianToRemoveFrom = await prompt('Enter musician name to remove from band: ');
         const bandToRemoveFrom = await prompt('Enter band name to remove musician from: ');
         const musicianIndexToRemoveFrom = musicians.findIndex(musician => musician.name === musicianToRemoveFrom);
@@ -219,7 +199,6 @@ async function runProgram() {
         break;
 
       case '7':
-        // Show musician information
         const musicianToShow = await prompt('Enter musician name to show information: ');
         const musicianIndexToShow = musicians.findIndex(musician => musician.name === musicianToShow);
         if (musicianIndexToShow !== -1) {
@@ -245,7 +224,6 @@ async function runProgram() {
     }
   }
 
-  // Save the updated data
   saveData('bands.json', bands);
   saveData('musicians.json', musicians);
 
