@@ -229,7 +229,7 @@ async function runProgram() {
           console.log(`Birth Year: ${musician.birthYear}`);
           console.log(`Bands: ${musician.bands.map(band => band.name).join(', ')}`);
           console.log(`Previous Bands: ${musician.previousBands.map(band => band.name).join(', ')}`);
-          console.log(`Instruments: ${musician.instruments.join(', ')}`);
+          console.log(`Instruments: ${musician.instruments});
         } else {
           console.log('Musician not found');
         }
