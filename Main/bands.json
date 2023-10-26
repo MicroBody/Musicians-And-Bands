@@ -14,5 +14,13 @@
     "yearDisbanded": null,
     "members": [],
     "priorMembers": []
+  },
+  {
+    "name": "Test 3",
+    "info": "This is the third test group",
+    "yearEstablished": 2004,
+    "yearDisbanded": null,
+    "members": [],
+    "priorMembers": []
   }
 ]
