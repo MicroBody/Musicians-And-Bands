@@ -18,24 +18,44 @@ function prompt(question) {
 
 // Band class
 class Band {
-  constructor(name) {
+  constructor(name, info, yearEstablished, yearDisbanded = null) {
     this.name = name;
+    this.info = info;
+    this.yearEstablished = yearEstablished;
+    this.yearDisbanded = yearDisbanded;
     this.members = [];
+    this.priorMembers = [];
   }
 
-  addMember(musician) {
-    if (!this.members.includes(musician)) {
-      this.members.push(musician);
-      musician.addBand(this);
+  addMember(musician, joinYear, instrument) {
+    if (!this.members.some(member => member.musician === musician)) {
+      this.members.push({ musician, joinYear, instrument });
+      musician.addBand(this, joinYear);
     }
   }
 
-  removeMember(musician) {
-    const index = this.members.indexOf(musician);
+  removeMember(musician, leaveYear) {
+    const index = this.members.findIndex(member => member.musician === musician);
     if (index !== -1) {
-      this.members.splice(index, 1);
-      musician.removeBand(this);
+      const [member] = this.members.splice(index, 1);
+      member.leaveYear = leaveYear;
+      this.priorMembers.push(member);
+      musician.removeBand(this, leaveYear);
     }
+  }
+
+  getMemberInfo() {
+    return this.members.map(member => {
+      const musician = member.musician;
+      return `Name: ${musician.name}, Joined: ${member.joinYear}, Instrument: ${member.instrument}`;
+    }).join('\n');
+  }
+
+  getPriorMemberInfo() {
+    return this.priorMembers.map(member => {
+      const musician = member.musician;
+      return `Name: ${musician.name}, Left: ${member.leaveYear}`;
+    }).join('\n');
   }
 }
 
@@ -133,7 +153,10 @@ async function runProgram() {
       case '1':
         // Create new band
         const bandName = await prompt('Enter band name: ');
-        const band = new Band(bandName);
+        const bandInfo = await prompt('Enter band info: ');
+        const yearEstablished = parseInt(await prompt('Enter year established: '));
+        const yearDisbanded = parseInt(await prompt('Enter year disbanded (optional, leave blank if active): ')) || null;
+        const band = new Band(bandName, bandInfo, yearEstablished, yearDisbanded);
         bands.push(band);
         break;
 
