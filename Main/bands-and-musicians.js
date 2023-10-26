@@ -94,9 +94,7 @@ const musicians = loadData('musicians.json');
 
 // ...
 
-// After performing operations, load the updated data
-loadData('bands.json', bands);
-loadData('musicians.json', musicians);
+// ...
 
 // Example usage
 async function runProgram() {
@@ -135,7 +133,70 @@ async function runProgram() {
         }
         break;
 
-      // Rest of the cases...
+      case '3':
+        // Create new musician
+        const musicianName = await prompt('Enter musician name: ');
+        const birthYear = parseInt(await prompt('Enter birth year: '));
+        const musician = new Musician(musicianName, birthYear);
+        musicians.push(musician);
+        break;
+
+      case '4':
+        // Remove musician
+        const musicianToRemove = await prompt('Enter musician name to remove: ');
+        const musicianIndex = musicians.findIndex(musician => musician.name === musicianToRemove);
+        if (musicianIndex !== -1) {
+          musicians.splice(musicianIndex, 1);
+        } else {
+          console.log('Musician not found');
+        }
+        break;
+
+      case '5':
+        // Add musician to band
+        const musicianToAdd = await prompt('Enter musician name to add: ');
+        const bandToAddTo = await prompt('Enter band name to add musician to: ');
+        const musicianIndexToAdd = musicians.findIndex(musician => musician.name === musicianToAdd);
+        const bandIndexToAddTo = bands.findIndex(band => band.name === bandToAddTo);
+        if (musicianIndexToAdd !== -1 && bandIndexToAddTo !== -1) {
+          const musician = musicians[musicianIndexToAdd];
+          const band = bands[bandIndexToAddTo];
+          band.addMember(musician);
+          console.log(`${musician.name} added to ${band.name}`);
+        } else {
+          console.log('Musician or band not found');
+        }
+        break;
+
+      case '6':
+        // Remove musician from band
+        const musicianToRemoveFrom = await prompt('Enter musician name to remove from band: ');
+        const bandToRemoveFrom = await prompt('Enter band name to remove musician from: ');
+        const musicianIndexToRemoveFrom = musicians.findIndex(musician => musician.name === musicianToRemoveFrom);
+        const bandIndexToRemoveFrom = bands.findIndex(band => band.name === bandToRemoveFrom);
+        if (musicianIndexToRemoveFrom !== -1 && bandIndexToRemoveFrom !== -1) {
+          const musician = musicians[musicianIndexToRemoveFrom];
+          const band = bands[bandIndexToRemoveFrom];
+          band.removeMember(musician);
+          console.log(`${musician.name} removed from ${band.name}`);
+        } else {
+          console.log('Musician or band not found');
+        }
+        break;
+
+      case '7':
+        // Show musician information
+        const musicianToShow = await prompt('Enter musician name to show information: ');
+        const musicianIndexToShow = musicians.findIndex(musician => musician.name === musicianToShow);
+        if (musicianIndexToShow !== -1) {
+          const musician = musicians[musicianIndexToShow];
+          console.log(`Name: ${musician.name}`);
+          console.log(`Age: ${musician.getAge()}`);
+          console.log(`Bands: ${musician.bands.map(band => band.name).join(', ')}`);
+        } else {
+          console.log('Musician not found');
+        }
+        break;
 
       case '0':
         exit = true;
